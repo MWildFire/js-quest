@@ -1,20 +1,22 @@
-import { Routes, Route } from 'react-router-dom'
-
-function Home() {
-  return (
-    <main className="min-h-full grid place-items-center p-8">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-yellow-400">JS Quest</h1>
-        <p className="mt-2 text-slate-300">Загрузка тренажёра…</p>
-      </div>
-    </main>
-  )
-}
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { Layout } from './components/Layout'
+import { HomePage } from './pages/HomePage'
+import { ModulePage } from './pages/ModulePage'
+import { TaskPage } from './pages/TaskPage'
+import { QuizPage } from './pages/QuizPage'
+import { BadgesPage } from './pages/BadgesPage'
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route element={<Layout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/module/:moduleId" element={<ModulePage />} />
+        <Route path="/task/:taskId" element={<TaskPage />} />
+        <Route path="/quiz/:quizId" element={<QuizPage />} />
+        <Route path="/badges" element={<BadgesPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Route>
     </Routes>
   )
 }
