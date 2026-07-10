@@ -6,9 +6,16 @@ import { levelForXp, levelTitle } from '../lib/leveling'
 
 export function BadgesPage() {
   const state = useProgress()
+  const reset = useProgress((s) => s.reset)
   const xp = totalXp(state)
   const level = levelForXp(xp)
   const earnedCount = BADGES.filter((b) => b.earned(state)).length
+
+  function handleReset() {
+    if (window.confirm('Точно сбросить весь прогресс? Это действие нельзя отменить.')) {
+      reset()
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -52,6 +59,15 @@ export function BadgesPage() {
             </div>
           )
         })}
+      </div>
+
+      <div className="pt-4 border-t border-slate-800">
+        <button
+          onClick={handleReset}
+          className="text-xs text-slate-500 hover:text-red-400 transition-colors"
+        >
+          Сбросить весь прогресс
+        </button>
       </div>
     </div>
   )
