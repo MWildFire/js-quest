@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useProgress } from '../store/progress'
 import { totalXp, solvedCount, totalTaskCount } from '../lib/progress'
 import { XpBar } from './XpBar'
+import { BadgeToaster } from './BadgeToaster'
 
 export function Layout() {
   const xp = useProgress(totalXp)
@@ -50,6 +51,8 @@ export function Layout() {
       <footer className="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
         JS Quest — учись, решая. Сделано с ❤️ для Луки.
       </footer>
+
+      <BadgeToaster />
     </div>
   )
 }
